@@ -14,17 +14,6 @@ export const ModDetail: React.FC = () => {
 
   if (!mod) return <div className="text-white p-10">Mod not found</div>;
 
-  const handleDownload = () => {
-      // Create a dummy zip file for demonstration
-      const element = document.createElement("a");
-      const file = new Blob(["Dummy mod content"], {type: 'text/plain'});
-      element.href = URL.createObjectURL(file);
-      element.download = `${mod.title.replace(/\s+/g, '_')}.zip`;
-      document.body.appendChild(element); // Required for this to work in FireFox
-      element.click();
-      document.body.removeChild(element);
-  };
-
   const handleShare = () => {
       navigator.clipboard.writeText(window.location.href);
       alert('Link copied to clipboard!');
@@ -97,12 +86,14 @@ export const ModDetail: React.FC = () => {
 
                   {/* Action Buttons */}
                   <div className="flex flex-col gap-3 justify-center min-w-[200px]">
-                      <button 
-                        onClick={handleDownload}
+                      <a 
+                        href={mod.zipUrl || '#'}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="bg-primary text-black font-bold py-3 px-6 rounded-lg hover:bg-green-400 transition-colors flex justify-center items-center gap-2 shadow-[0_0_15px_rgba(27,217,106,0.3)]"
                       >
                           <Download size={20} /> Download
-                      </button>
+                      </a>
                       <div className="flex gap-2">
                            <button 
                                 onClick={handleShare}

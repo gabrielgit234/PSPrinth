@@ -28,18 +28,21 @@ export const ModCard: React.FC<ModCardProps> = ({ mod }) => {
 
   return (
     <Link to={`/mod/${mod.id}`} className="block group">
-      <div className="bg-[#1c1c1c] rounded-lg p-4 flex flex-col sm:flex-row gap-5 hover:bg-[#252525] transition-all border border-[#2d2d2d] hover:border-[#404040]">
+      <div className="bg-[#1c1c1c] rounded-xl p-5 flex flex-col sm:flex-row gap-5 hover:bg-[#252525] transition-all border border-[#2d2d2d] hover:border-primary/50 hover:shadow-[0_0_15px_rgba(27,217,106,0.1)] relative overflow-hidden">
+        {/* Hover Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+        
         {/* Icon */}
-        <div className="flex-shrink-0">
+        <div className="flex-shrink-0 relative z-10">
           <img 
             src={mod.iconUrl} 
             alt={mod.title} 
-            className="w-20 h-20 sm:w-24 sm:h-24 rounded-lg object-cover bg-[#0f0f0f] shadow-md"
+            className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl object-cover bg-[#0f0f0f] shadow-lg group-hover:scale-105 transition-transform duration-300"
           />
         </div>
 
         {/* Content */}
-        <div className="flex-grow flex flex-col justify-between min-w-0">
+        <div className="flex-grow flex flex-col justify-between min-w-0 relative z-10">
           <div className="flex justify-between items-start">
             <div className="min-w-0 pr-4">
                 <div className="flex items-center gap-2 mb-1">

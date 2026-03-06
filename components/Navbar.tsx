@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, Gamepad2, User, Search, Sparkles, Upload } from 'lucide-react';
+import { Menu, X, Gamepad2, User, Search, Sparkles } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +22,7 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-[#1c1c1c] border-b border-[#2d2d2d] shadow-lg">
+    <nav className="sticky top-0 z-50 bg-[#1c1c1c]/90 backdrop-blur-md border-b border-[#2d2d2d] shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo & Discord */}
@@ -77,17 +77,6 @@ export const Navbar: React.FC = () => {
                 <User size={18} />
                 Skins
               </a>
-              <Link
-                  to="/upload"
-                  className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                    isActive('/upload')
-                      ? 'bg-primary text-black'
-                      : 'bg-[#2d2d2d] text-primary hover:bg-[#3d3d3d]'
-                  }`}
-                >
-                  <Upload size={18} />
-                  Upload
-                </Link>
             </div>
           </div>
 
@@ -149,18 +138,6 @@ export const Navbar: React.FC = () => {
                 <User size={18} />
                 Skins
             </a>
-            <Link
-                to="/upload"
-                onClick={() => setIsOpen(false)}
-                className={`flex items-center gap-2 px-3 py-2 rounded-md text-base font-medium ${
-                    isActive('/upload')
-                      ? 'bg-primary text-black'
-                      : 'text-primary hover:bg-[#2d2d2d]'
-                  }`}
-              >
-                <Upload size={18} />
-                Upload
-              </Link>
           </div>
         </div>
       )}

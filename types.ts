@@ -12,6 +12,7 @@ export interface Mod {
   version: string;
   license: string;
   loader: string;
+  zipUrl?: string;
   bannerUrl?: string;
   galleryUrls?: string[];
   discordUrl?: string;
