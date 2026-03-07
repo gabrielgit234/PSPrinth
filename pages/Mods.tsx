@@ -4,7 +4,7 @@ import { useData } from '../contexts/DataContext';
 import { useSettings } from '../contexts/SettingsContext';
 import { ModCard } from '../components/ModCard';
 import { Search, SlidersHorizontal, ChevronDown, Check, X, ChevronLeft, ChevronRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export const Mods: React.FC = () => {
   const { mods } = useData();
@@ -205,9 +205,20 @@ export const Mods: React.FC = () => {
                 </div>
 
                 <div className="flex flex-col gap-3">
-                    {paginatedMods.map(mod => (
-                        <ModCard key={mod.id} mod={mod} />
-                    ))}
+                    <AnimatePresence mode="popLayout">
+                        {paginatedMods.map(mod => (
+                            <motion.div
+                                key={mod.id}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, scale: 0.95 }}
+                                transition={{ duration: 0.2 }}
+                                layout
+                            >
+                                <ModCard mod={mod} />
+                            </motion.div>
+                        ))}
+                    </AnimatePresence>
                     {filteredMods.length === 0 && (
                         <div className="bg-surface rounded-lg border border-border p-12 text-center">
                             <div className="w-16 h-16 bg-surface-hover rounded-full flex items-center justify-center mx-auto mb-4 text-secondary">

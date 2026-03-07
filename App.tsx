@@ -4,6 +4,7 @@ import { Navbar } from './components/Navbar';
 import { Home } from './pages/Home';
 import { Mods } from './pages/Mods';
 import { ModDetail } from './pages/ModDetail';
+import { Donate } from './pages/Donate';
 import { DataProvider } from './contexts/DataContext';
 import { SettingsProvider } from './contexts/SettingsContext';
 import { SettingsModal } from './components/SettingsModal';
@@ -19,6 +20,7 @@ const AnimatedRoutes: React.FC = () => {
         <Route path="/" element={<Home />} />
         <Route path="/textures" element={<Mods />} />
         <Route path="/mod/:id" element={<ModDetail />} />
+        <Route path="/donate" element={<Donate />} />
       </Routes>
     </AnimatePresence>
   );

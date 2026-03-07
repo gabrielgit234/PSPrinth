@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, Gamepad2, User, Search, Sparkles, Settings } from 'lucide-react';
+import { Menu, X, Gamepad2, User, Search, Sparkles, Settings, Heart } from 'lucide-react';
 import { useSettings } from '../contexts/SettingsContext';
 
 export const Navbar: React.FC = () => {
@@ -12,6 +12,7 @@ export const Navbar: React.FC = () => {
 
   const navLinks = [
     { name: 'Textures', path: '/textures', icon: <Gamepad2 size={18} /> },
+    { name: 'Donate', path: '/donate', icon: <Heart size={18} /> },
   ];
 
   const isActive = (path: string) => location.pathname === path;
