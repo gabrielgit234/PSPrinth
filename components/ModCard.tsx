@@ -28,16 +28,16 @@ export const ModCard: React.FC<ModCardProps> = ({ mod }) => {
 
   return (
     <Link to={`/mod/${mod.id}`} className="block group">
-      <div className="bg-[#1c1c1c] rounded-xl p-5 flex flex-col sm:flex-row gap-5 hover:bg-[#252525] transition-all border border-[#2d2d2d] hover:border-primary/50 hover:shadow-[0_0_15px_rgba(27,217,106,0.1)] relative overflow-hidden">
+      <div className="bg-surface rounded-2xl p-6 flex flex-col sm:flex-row gap-6 hover:bg-surface-hover transition-all border border-border hover:border-primary/30 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] relative overflow-hidden group-hover:-translate-y-1 duration-300">
         {/* Hover Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
         
         {/* Icon */}
         <div className="flex-shrink-0 relative z-10">
           <img 
             src={mod.iconUrl} 
             alt={mod.title} 
-            className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl object-cover bg-[#0f0f0f] shadow-lg group-hover:scale-105 transition-transform duration-300"
+            className="w-24 h-24 sm:w-28 sm:h-28 rounded-xl object-cover bg-background shadow-xl border border-border group-hover:border-primary/30 transition-colors"
           />
         </div>
 
@@ -45,39 +45,41 @@ export const ModCard: React.FC<ModCardProps> = ({ mod }) => {
         <div className="flex-grow flex flex-col justify-between min-w-0 relative z-10">
           <div className="flex justify-between items-start">
             <div className="min-w-0 pr-4">
-                <div className="flex items-center gap-2 mb-1">
-                    <h3 className="text-lg font-bold text-white group-hover:text-primary transition-colors truncate">{mod.title}</h3>
-                    <span className="text-xs text-gray-500 hidden sm:inline-block">by</span>
-                    <span className="text-sm font-medium text-gray-300 hover:underline z-10">{mod.author}</span>
+                <div className="flex flex-col gap-1 mb-2">
+                    <h3 className="text-xl font-bold text-text group-hover:text-primary transition-colors truncate">{mod.title}</h3>
+                    <div className="flex items-center gap-2 text-sm">
+                        <span className="text-secondary">by</span>
+                        <span className="font-medium text-secondary hover:text-text transition-colors z-10">{mod.author}</span>
+                    </div>
                 </div>
-                <p className="text-sm text-gray-400 line-clamp-2 leading-relaxed">
+                <p className="text-sm text-secondary line-clamp-2 leading-relaxed mb-3">
                   {mod.description}
                 </p>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-3 text-xs font-medium text-gray-400">
-             <div className="flex gap-2">
-                {mod.categories.map(cat => (
-                    <span key={cat} className="text-gray-300">{cat}</span>
-                ))}
-             </div>
+          <div className="flex flex-wrap items-center gap-2 mt-auto">
+             {mod.categories.map(cat => (
+                <span key={cat} className="px-2.5 py-1 rounded-lg bg-background border border-border text-xs font-medium text-secondary group-hover:border-gray-400 transition-colors">
+                    {cat}
+                </span>
+             ))}
           </div>
         </div>
 
-        {/* Stats Column (Right side on desktop) */}
-        <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-4 sm:gap-1 text-sm text-gray-400 sm:min-w-[120px] sm:border-l sm:border-[#333] sm:pl-5">
-            <div className="flex items-center gap-1.5 w-full sm:justify-end">
-                <Download size={14} className="text-gray-500"/>
-                <span className="font-semibold text-gray-200">{formatNumber(mod.downloads)}</span>
+        {/* Stats Column */}
+        <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-4 sm:gap-3 text-sm text-secondary sm:min-w-[140px] sm:border-l sm:border-border sm:pl-6">
+            <div className="flex items-center gap-2 w-full sm:justify-end group/stat">
+                <div className="p-1.5 rounded-full bg-background group-hover/stat:bg-primary/10 transition-colors">
+                    <Download size={14} className="text-secondary group-hover/stat:text-primary transition-colors"/>
+                </div>
+                <span className="font-semibold text-text">{formatNumber(mod.downloads)}</span>
             </div>
-            <div className="flex items-center gap-1.5 w-full sm:justify-end">
-                <Heart size={14} className="text-gray-500"/>
-                <span>{formatNumber(mod.follows)}</span>
-            </div>
-             <div className="flex items-center gap-1.5 w-full sm:justify-end mt-0 sm:mt-1">
-                <Calendar size={14} className="text-gray-500"/>
-                <span>{formatDate(mod.updated)}</span>
+            <div className="flex items-center gap-2 w-full sm:justify-end group/stat">
+                <div className="p-1.5 rounded-full bg-background group-hover/stat:bg-red-500/10 transition-colors">
+                    <Heart size={14} className="text-secondary group-hover/stat:text-red-500 transition-colors"/>
+                </div>
+                <span className="font-semibold text-text">{formatNumber(mod.follows)}</span>
             </div>
         </div>
       </div>

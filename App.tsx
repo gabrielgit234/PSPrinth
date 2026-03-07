@@ -5,6 +5,8 @@ import { Home } from './pages/Home';
 import { Mods } from './pages/Mods';
 import { ModDetail } from './pages/ModDetail';
 import { DataProvider } from './contexts/DataContext';
+import { SettingsProvider } from './contexts/SettingsContext';
+import { SettingsModal } from './components/SettingsModal';
 import { AnimatePresence } from 'framer-motion';
 
 const AnimatedRoutes: React.FC = () => {
@@ -25,23 +27,26 @@ const AnimatedRoutes: React.FC = () => {
 const App: React.FC = () => {
   return (
     <DataProvider>
-      <Router>
-        <div className="min-h-screen bg-[#0f0f0f] text-white font-sans selection:bg-primary selection:text-black">
-          <Navbar />
-          <main>
-            <AnimatedRoutes />
-          </main>
-          
-          <footer className="bg-[#1c1c1c] border-t border-[#2d2d2d] py-8 mt-12">
-              <div className="max-w-7xl mx-auto px-4 text-center">
-                  <p className="text-gray-500 text-sm">
-                      © 2024 PSPBlock Forge. Not affiliated with Mojang or Sony. <br/>
-                      Powered by React.
-                  </p>
-              </div>
-          </footer>
-        </div>
-      </Router>
+      <SettingsProvider>
+        <Router>
+          <div className="min-h-screen bg-background text-text font-sans selection:bg-primary selection:text-black transition-colors duration-300">
+            <Navbar />
+            <SettingsModal />
+            <main>
+              <AnimatedRoutes />
+            </main>
+            
+            <footer className="bg-surface border-t border-border py-8 mt-12 transition-colors duration-300">
+                <div className="max-w-7xl mx-auto px-4 text-center">
+                    <p className="text-secondary text-sm">
+                        © 2024 PSPBlock Forge. Not affiliated with Mojang or Sony. <br/>
+                        Powered by React.
+                    </p>
+                </div>
+            </footer>
+          </div>
+        </Router>
+      </SettingsProvider>
     </DataProvider>
   );
 };

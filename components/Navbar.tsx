@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, Gamepad2, User, Search, Sparkles } from 'lucide-react';
+import { Menu, X, Gamepad2, User, Search, Sparkles, Settings } from 'lucide-react';
+import { useSettings } from '../contexts/SettingsContext';
 
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
+  const { openSettings } = useSettings();
 
   const navLinks = [
     { name: 'Textures', path: '/textures', icon: <Gamepad2 size={18} /> },
@@ -22,7 +24,7 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-[#1c1c1c]/90 backdrop-blur-md border-b border-[#2d2d2d] shadow-lg">
+    <nav className="sticky top-0 z-50 bg-surface/90 backdrop-blur-md border-b border-border shadow-lg transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo & Discord */}
@@ -31,7 +33,7 @@ export const Navbar: React.FC = () => {
               href="https://discord.gg/WFhyQdAVps" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="text-gray-400 hover:text-[#5865F2] transition-colors"
+              className="text-secondary hover:text-[#5865F2] transition-colors"
               aria-label="Join our Discord"
             >
                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -46,22 +48,22 @@ export const Navbar: React.FC = () => {
                 className="w-12 h-12 object-contain"
               />
               <span className="font-bold text-xl tracking-tight">
-                <span className="text-primary">PSP</span><span className="text-white">rinth</span>
+                <span className="text-primary">PSP</span><span className="text-text">rinth</span>
               </span>
             </Link>
           </div>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
+          {/* Desktop Menu - Centered */}
+          <div className="hidden md:flex flex-1 justify-center">
+            <div className="flex items-baseline space-x-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.path}
                   className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                     isActive(link.path)
-                      ? 'bg-[#2d2d2d] text-primary'
-                      : 'text-gray-300 hover:bg-[#2d2d2d] hover:text-white'
+                      ? 'bg-surface-hover text-primary'
+                      : 'text-secondary hover:bg-surface-hover hover:text-text'
                   }`}
                 >
                   {link.icon}
@@ -72,7 +74,7 @@ export const Navbar: React.FC = () => {
                 href="https://mcskins.top/64x32/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors text-gray-300 hover:bg-[#2d2d2d] hover:text-white"
+                className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors text-secondary hover:bg-surface-hover hover:text-text"
               >
                 <User size={18} />
                 Skins
@@ -81,9 +83,9 @@ export const Navbar: React.FC = () => {
           </div>
 
           {/* Search Placeholder (Visual only for nav) */}
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center gap-3">
              <div className="relative">
-                <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500">
+                <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-secondary">
                     <Search size={16} />
                 </span>
                 <input 
@@ -92,16 +94,29 @@ export const Navbar: React.FC = () => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onKeyDown={handleSearch}
-                    className="bg-[#0f0f0f] text-sm text-white border border-[#333] rounded-full py-1.5 pl-9 pr-4 focus:outline-none focus:border-primary w-48 transition-all"
+                    className="bg-background text-sm text-text border border-border rounded-full py-1.5 pl-9 pr-4 focus:outline-none focus:border-primary w-48 transition-all"
                 />
              </div>
+             <button 
+                onClick={openSettings}
+                className="p-2 rounded-full bg-surface-hover text-secondary hover:text-text hover:bg-surface-hover transition-colors"
+                title="Settings"
+             >
+                <Settings size={20} />
+             </button>
           </div>
 
           {/* Mobile menu button */}
-          <div className="-mr-2 flex md:hidden">
+          <div className="-mr-2 flex md:hidden gap-2">
+            <button 
+              onClick={openSettings}
+              className="bg-surface-hover inline-flex items-center justify-center p-2 rounded-md text-secondary hover:text-text hover:bg-surface-hover focus:outline-none"
+            >
+              <Settings size={24} />
+            </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="bg-[#2d2d2d] inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-[#3d3d3d] focus:outline-none"
+              className="bg-surface-hover inline-flex items-center justify-center p-2 rounded-md text-secondary hover:text-text hover:bg-surface-hover focus:outline-none"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -111,7 +126,7 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-[#1c1c1c] border-t border-[#2d2d2d]">
+        <div className="md:hidden bg-surface border-t border-border">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navLinks.map((link) => (
               <Link
@@ -120,8 +135,8 @@ export const Navbar: React.FC = () => {
                 onClick={() => setIsOpen(false)}
                 className={`flex items-center gap-2 px-3 py-2 rounded-md text-base font-medium ${
                     isActive(link.path)
-                      ? 'bg-[#2d2d2d] text-primary'
-                      : 'text-gray-300 hover:bg-[#2d2d2d] hover:text-white'
+                      ? 'bg-surface-hover text-primary'
+                      : 'text-secondary hover:bg-surface-hover hover:text-text'
                   }`}
               >
                 {link.icon}
@@ -133,7 +148,7 @@ export const Navbar: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsOpen(false)}
-                className="flex items-center gap-2 px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-[#2d2d2d] hover:text-white"
+                className="flex items-center gap-2 px-3 py-2 rounded-md text-base font-medium text-secondary hover:bg-surface-hover hover:text-text"
             >
                 <User size={18} />
                 Skins
