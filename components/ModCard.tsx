@@ -3,12 +3,15 @@ import React from 'react';
 import { Mod } from '../types';
 import { Download, Calendar, Heart, Box, Scale } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useSettings } from '../contexts/SettingsContext';
 
 interface ModCardProps {
   mod: Mod;
 }
 
 export const ModCard: React.FC<ModCardProps> = ({ mod }) => {
+  const { compactMode } = useSettings();
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     const now = new Date();
@@ -28,7 +31,7 @@ export const ModCard: React.FC<ModCardProps> = ({ mod }) => {
 
   return (
     <Link to={`/mod/${mod.id}`} className="block group">
-      <div className="bg-surface rounded-2xl p-6 flex flex-col sm:flex-row gap-6 hover:bg-surface-hover transition-all border border-border hover:border-primary/30 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] relative overflow-hidden group-hover:-translate-y-1 duration-300">
+      <div className={`bg-surface rounded-2xl flex flex-col sm:flex-row hover:bg-surface-hover transition-all border border-border hover:border-primary/30 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] relative overflow-hidden group-hover:-translate-y-1 duration-300 ${compactMode ? 'p-4 gap-4' : 'p-6 gap-6'}`}>
         {/* Hover Gradient */}
         <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
         
@@ -37,7 +40,7 @@ export const ModCard: React.FC<ModCardProps> = ({ mod }) => {
           <img 
             src={mod.iconUrl} 
             alt={mod.title} 
-            className="w-24 h-24 sm:w-28 sm:h-28 rounded-xl object-cover bg-background shadow-xl border border-border group-hover:border-primary/30 transition-colors"
+            className={`${compactMode ? 'w-16 h-16 sm:w-20 sm:h-20' : 'w-24 h-24 sm:w-28 sm:h-28'} rounded-xl object-cover bg-background shadow-xl border border-border group-hover:border-primary/30 transition-colors`}
           />
         </div>
 

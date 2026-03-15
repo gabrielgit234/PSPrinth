@@ -10,6 +10,12 @@ interface SettingsContextType {
   isSettingsOpen: boolean;
   openSettings: () => void;
   closeSettings: () => void;
+  animationsEnabled: boolean;
+  setAnimationsEnabled: (enabled: boolean) => void;
+  compactMode: boolean;
+  setCompactMode: (compact: boolean) => void;
+  language: 'pt' | 'en';
+  setLanguage: (lang: 'pt' | 'en') => void;
 }
 
 const SettingsContext = createContext<SettingsContextType | undefined>(undefined);
@@ -19,6 +25,9 @@ export const SettingsProvider: React.FC<{ children: ReactNode }> = ({ children }
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [animationsEnabled, setAnimationsEnabled] = useState(true);
+  const [compactMode, setCompactMode] = useState(false);
+  const [language, setLanguage] = useState<'pt' | 'en'>('pt');
 
   useEffect(() => {
     document.documentElement.style.setProperty('--color-primary', primaryColor);
@@ -45,7 +54,13 @@ export const SettingsProvider: React.FC<{ children: ReactNode }> = ({ children }
       toggleTheme,
       isSettingsOpen,
       openSettings,
-      closeSettings
+      closeSettings,
+      animationsEnabled,
+      setAnimationsEnabled,
+      compactMode,
+      setCompactMode,
+      language,
+      setLanguage
     }}>
       {children}
     </SettingsContext.Provider>

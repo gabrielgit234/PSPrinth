@@ -2,12 +2,15 @@ import React from 'react';
 import { Skin } from '../types';
 import { Link } from 'react-router-dom';
 import { Eye, Download } from 'lucide-react';
+import { useSettings } from '../contexts/SettingsContext';
 
 interface SkinCardProps {
   skin: Skin;
 }
 
 export const SkinCard: React.FC<SkinCardProps> = ({ skin }) => {
+  const { compactMode } = useSettings();
+
   // CSS Paper Doll for Front View
   // Using background-image positioning to construct the character
   // Scale factor: The base model is small (16px width x 32px height of texture pixels)
@@ -34,9 +37,9 @@ export const SkinCard: React.FC<SkinCardProps> = ({ skin }) => {
     <Link to={`/skin/${skin.id}`} className="block group">
       <div className="bg-[#1c1c1c] rounded-lg overflow-hidden border border-[#2d2d2d] hover:border-primary transition-all flex flex-col h-full hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/10">
         {/* Preview Area */}
-        <div className="relative h-48 bg-[#252525] flex items-center justify-center overflow-hidden bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#333] to-[#1c1c1c]">
+        <div className={`relative ${compactMode ? 'h-32' : 'h-48'} bg-[#252525] flex items-center justify-center overflow-hidden bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#333] to-[#1c1c1c]`}>
            
-           <div className="relative w-[16px] h-[32px] transform scale-[4.5] group-hover:scale-[5] transition-transform duration-300">
+           <div className={`relative w-[16px] h-[32px] transform ${compactMode ? 'scale-[3]' : 'scale-[4.5]'} group-hover:${compactMode ? 'scale-[3.5]' : 'scale-[5]'} transition-transform duration-300`}>
                 {/* Head (8x8) at 4,0 */}
                 <SkinPart w={8} h={8} x={4} y={0} bgX={8} bgY={8} />
                 
@@ -77,9 +80,9 @@ export const SkinCard: React.FC<SkinCardProps> = ({ skin }) => {
            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
         </div>
         
-        <div className="p-3 bg-[#1c1c1c] flex-grow flex flex-col justify-between border-t border-[#333]">
-          <h3 className="font-semibold text-white truncate text-center text-sm mb-2">{skin.name}</h3>
-          <div className="flex justify-center gap-3 text-gray-500 text-xs">
+        <div className={`${compactMode ? 'p-2' : 'p-3'} bg-[#1c1c1c] flex-grow flex flex-col justify-between border-t border-[#333]`}>
+          <h3 className={`font-semibold text-white truncate text-center ${compactMode ? 'text-xs mb-1' : 'text-sm mb-2'}`}>{skin.name}</h3>
+          <div className={`flex justify-center gap-3 text-gray-500 ${compactMode ? 'text-[10px]' : 'text-xs'}`}>
             <span className="flex items-center gap-1"><Eye size={12}/> {skin.views > 1000 ? (skin.views/1000).toFixed(1) + 'k' : skin.views}</span>
             <span className="flex items-center gap-1"><Download size={12}/> {skin.downloads > 1000 ? (skin.downloads/1000).toFixed(1) + 'k' : skin.downloads}</span>
           </div>

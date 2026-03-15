@@ -12,7 +12,13 @@ export const SettingsModal: React.FC = () => {
     primaryColor,
     setPrimaryColor,
     theme,
-    toggleTheme
+    toggleTheme,
+    animationsEnabled,
+    setAnimationsEnabled,
+    compactMode,
+    setCompactMode,
+    language,
+    setLanguage
   } = useSettings();
 
   const colors = [
@@ -108,6 +114,62 @@ export const SettingsModal: React.FC = () => {
                       title={color.name}
                     />
                   ))}
+                </div>
+              </div>
+
+              {/* Language */}
+              <div>
+                <label className="block text-sm font-medium text-secondary mb-3">Language</label>
+                <div className="flex gap-4">
+                  <button
+                    onClick={() => setLanguage('pt')}
+                    className={`flex-1 py-2 px-4 rounded-xl border transition-all ${
+                      language === 'pt' 
+                        ? 'bg-primary/10 border-primary text-primary' 
+                        : 'bg-background border-border text-secondary hover:border-gray-400'
+                    }`}
+                  >
+                    Português
+                  </button>
+                  <button
+                    onClick={() => setLanguage('en')}
+                    className={`flex-1 py-2 px-4 rounded-xl border transition-all ${
+                      language === 'en' 
+                        ? 'bg-primary/10 border-primary text-primary' 
+                        : 'bg-background border-border text-secondary hover:border-gray-400'
+                    }`}
+                  >
+                    English
+                  </button>
+                </div>
+              </div>
+
+              {/* Toggles */}
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-text font-medium">Animations</h3>
+                    <p className="text-sm text-secondary">Enable UI animations and transitions</p>
+                  </div>
+                  <button 
+                    onClick={() => setAnimationsEnabled(!animationsEnabled)}
+                    className={`w-12 h-6 rounded-full transition-colors relative ${animationsEnabled ? 'bg-primary' : 'bg-surface-hover'}`}
+                  >
+                    <div className={`w-4 h-4 rounded-full bg-white absolute top-1 transition-transform ${animationsEnabled ? 'translate-x-7' : 'translate-x-1'}`} />
+                  </button>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-text font-medium">Compact Mode</h3>
+                    <p className="text-sm text-secondary">Reduce padding and spacing in lists</p>
+                  </div>
+                  <button 
+                    onClick={() => setCompactMode(!compactMode)}
+                    className={`w-12 h-6 rounded-full transition-colors relative ${compactMode ? 'bg-primary' : 'bg-surface-hover'}`}
+                  >
+                    <div className={`w-4 h-4 rounded-full bg-white absolute top-1 transition-transform ${compactMode ? 'translate-x-7' : 'translate-x-1'}`} />
+                  </button>
                 </div>
               </div>
             </div>

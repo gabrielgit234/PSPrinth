@@ -7,7 +7,7 @@ export const ModDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { mods, incrementDownload, toggleLike } = useData();
   const mod = mods.find(m => m.id === id);
-  const [activeTab, setActiveTab] = useState<'description' | 'gallery'>('description');
+  const [activeTab, setActiveTab] = useState<'description'>('description');
 
   const [isFollowed, setIsFollowed] = useState(false);
 
@@ -119,7 +119,6 @@ export const ModDetail: React.FC = () => {
               {/* Tabs Navigation (Modrinth Style) */}
               <div className="flex gap-4 mt-8 overflow-x-auto no-scrollbar border-t border-border">
                   <TabButton id="description" label="Description" />
-                  <TabButton id="gallery" label="Gallery" />
               </div>
           </div>
        </div>
@@ -140,23 +139,6 @@ export const ModDetail: React.FC = () => {
                            <div className="prose prose-invert max-w-none prose-headings:text-text prose-p:text-secondary prose-a:text-primary prose-strong:text-text">
                                <p className="text-lg leading-relaxed mb-6">{mod.description}</p>
                            </div>
-                       </div>
-                   )}
-
-                   {activeTab === 'gallery' && (
-                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                           {(mod.galleryUrls || [1, 2, 3, 4]).map((item, i) => (
-                               <div key={i} className="group relative aspect-video bg-surface rounded-lg overflow-hidden border border-border hover:border-primary transition-colors cursor-pointer">
-                                   <img 
-                                      src={typeof item === 'string' ? item : `https://picsum.photos/seed/${mod.id}${item}/800/450`} 
-                                      alt="Screenshot" 
-                                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                   />
-                                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                       <Eye className="text-white" size={32} />
-                                   </div>
-                               </div>
-                           ))}
                        </div>
                    )}
                </div>
