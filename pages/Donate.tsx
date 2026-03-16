@@ -4,16 +4,11 @@ import { Heart, Coffee, Star, ArrowRight } from 'lucide-react';
 
 export const Donate: React.FC = () => {
   // Mock data for donations
-  const goal = 100;
-  const raised = 45;
+  const goal = 3;
+  const raised = 0;
   const percentage = Math.min(100, Math.round((raised / goal) * 100));
 
-  const recentDonors = [
-    { name: 'Alex', amount: 10, message: 'Keep up the great work!' },
-    { name: 'Steve', amount: 5, message: 'Love the textures.' },
-    { name: 'Anonymous', amount: 20, message: '' },
-    { name: 'CreeperFan', amount: 10, message: 'Thanks for keeping PSP alive.' },
-  ];
+  const recentDonors: any[] = [];
 
   return (
     <motion.div 
@@ -40,7 +35,7 @@ export const Donate: React.FC = () => {
           </p>
           
           <a 
-            href="https://ko-fi.com/gabrielpcnovo" 
+            href="https://ko-fi.com/psprinthproject" 
             target="_blank" 
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#FF5E5B] text-white px-8 py-4 rounded-xl font-bold hover:brightness-110 transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(255,94,91,0.3)] text-lg"
@@ -57,7 +52,7 @@ export const Donate: React.FC = () => {
           {/* Goal Tracker */}
           <div className="bg-surface border border-border rounded-2xl p-8 shadow-sm">
             <h2 className="text-2xl font-bold text-text mb-6 flex items-center gap-2">
-              <Star className="text-yellow-500" /> Monthly Goal
+              <Star className="text-yellow-500" /> Year Goal
             </h2>
             
             <div className="mb-4 flex justify-between items-end">
@@ -80,15 +75,7 @@ export const Donate: React.FC = () => {
               <ul className="text-sm text-secondary space-y-2">
                 <li className="flex items-start gap-2">
                   <ArrowRight size={16} className="text-primary shrink-0 mt-0.5" />
-                  <span>Pay for domain and hosting costs</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <ArrowRight size={16} className="text-primary shrink-0 mt-0.5" />
-                  <span>Support development of new features</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <ArrowRight size={16} className="text-primary shrink-0 mt-0.5" />
-                  <span>Keep the platform ad-free</span>
+                  <span>To motivate me to continue on the MCPSP path and create a desktop app</span>
                 </li>
               </ul>
             </div>
@@ -101,33 +88,39 @@ export const Donate: React.FC = () => {
             </h2>
             
             <div className="space-y-4">
-              {recentDonors.map((donor, index) => (
-                <motion.div 
-                  key={index}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 * index }}
-                  className="p-4 rounded-xl bg-background border border-border flex items-start gap-4"
-                >
-                  <div className="w-10 h-10 rounded-full bg-surface-hover flex items-center justify-center text-secondary font-bold shrink-0">
-                    {donor.name.charAt(0)}
-                  </div>
-                  <div>
-                    <div className="flex items-baseline gap-2">
-                      <span className="font-bold text-text">{donor.name}</span>
-                      <span className="text-sm font-medium text-green-500">bought {donor.amount / 5} coffees</span>
+              {recentDonors.length > 0 ? (
+                recentDonors.map((donor, index) => (
+                  <motion.div 
+                    key={index}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 * index }}
+                    className="p-4 rounded-xl bg-background border border-border flex items-start gap-4"
+                  >
+                    <div className="w-10 h-10 rounded-full bg-surface-hover flex items-center justify-center text-secondary font-bold shrink-0">
+                      {donor.name.charAt(0)}
                     </div>
-                    {donor.message && (
-                      <p className="text-sm text-secondary mt-1 italic">"{donor.message}"</p>
-                    )}
-                  </div>
-                </motion.div>
-              ))}
+                    <div>
+                      <div className="flex items-baseline gap-2">
+                        <span className="font-bold text-text">{donor.name}</span>
+                        <span className="text-sm font-medium text-green-500">bought {donor.amount / 5} coffees</span>
+                      </div>
+                      {donor.message && (
+                        <p className="text-sm text-secondary mt-1 italic">"{donor.message}"</p>
+                      )}
+                    </div>
+                  </motion.div>
+                ))
+              ) : (
+                <div className="text-center py-8 text-secondary">
+                  <p>No supporters yet. Be the first!</p>
+                </div>
+              )}
             </div>
             
             <div className="mt-6 text-center">
               <a 
-                href="https://ko-fi.com/gabrielpcnovo" 
+                href="https://ko-fi.com/psprinthproject" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-sm text-secondary hover:text-text underline transition-colors"

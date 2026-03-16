@@ -10,17 +10,20 @@ export const ModDetail: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'description'>('description');
 
   const [isFollowed, setIsFollowed] = useState(false);
+  const [showCopied, setShowCopied] = useState(false);
 
   if (!mod) return <div className="text-white p-10">Mod not found</div>;
 
   const handleShare = () => {
       navigator.clipboard.writeText(window.location.href);
-      alert('Link copied to clipboard!');
+      setShowCopied(true);
+      setTimeout(() => setShowCopied(false), 2000);
   };
 
   const handleFollow = () => {
-      setIsFollowed(!isFollowed);
-      toggleLike(mod.id);
+      const newFollowState = !isFollowed;
+      setIsFollowed(newFollowState);
+      toggleLike(mod.id, newFollowState);
   };
 
   const handleDownloadClick = () => {
@@ -98,9 +101,17 @@ export const ModDetail: React.FC = () => {
                       <div className="flex gap-2">
                            <button 
                                 onClick={handleShare}
-                                className="flex-1 bg-surface border border-border text-text py-2 rounded-lg hover:bg-surface-hover flex justify-center items-center gap-2 font-medium transition-colors"
+                                className="relative flex-1 bg-surface border border-border text-text py-2 rounded-lg hover:bg-surface-hover flex justify-center items-center gap-2 font-medium transition-colors overflow-hidden"
                            >
-                               <Share2 size={16} /> Share
+                               {showCopied ? (
+                                 <span className="flex items-center gap-2 text-primary animate-in fade-in slide-in-from-bottom-2">
+                                   <CheckCircle size={16} /> Copied!
+                                 </span>
+                               ) : (
+                                 <span className="flex items-center gap-2">
+                                   <Share2 size={16} /> Share
+                                 </span>
+                               )}
                            </button>
                            <button 
                                 onClick={handleFollow}

@@ -14,8 +14,6 @@ interface SettingsContextType {
   setAnimationsEnabled: (enabled: boolean) => void;
   compactMode: boolean;
   setCompactMode: (compact: boolean) => void;
-  language: 'pt' | 'en';
-  setLanguage: (lang: 'pt' | 'en') => void;
 }
 
 const SettingsContext = createContext<SettingsContextType | undefined>(undefined);
@@ -27,7 +25,6 @@ export const SettingsProvider: React.FC<{ children: ReactNode }> = ({ children }
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [animationsEnabled, setAnimationsEnabled] = useState(true);
   const [compactMode, setCompactMode] = useState(false);
-  const [language, setLanguage] = useState<'pt' | 'en'>('pt');
 
   useEffect(() => {
     document.documentElement.style.setProperty('--color-primary', primaryColor);
@@ -58,9 +55,7 @@ export const SettingsProvider: React.FC<{ children: ReactNode }> = ({ children }
       animationsEnabled,
       setAnimationsEnabled,
       compactMode,
-      setCompactMode,
-      language,
-      setLanguage
+      setCompactMode
     }}>
       {children}
     </SettingsContext.Provider>

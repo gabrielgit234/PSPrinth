@@ -8,7 +8,7 @@ interface DataContextType {
   addMod: (mod: Mod) => void;
   addSkin: (skin: Skin) => void;
   incrementDownload: (id: string) => void;
-  toggleLike: (id: string) => void;
+  toggleLike: (id: string, isFollowing: boolean) => void;
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
@@ -57,11 +57,15 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       .catch(err => console.error('Failed to update download count on server:', err));
   };
 
-  const toggleLike = (id: string) => {
+  const toggleLike = (id: string, isFollowing: boolean) => {
     // Optimistic update
-    setMods(prev => prev.map(m => m.id === id ? { ...m, follows: m.follows + 1 } : m));
+    setMods(prev => prev.map(m => m.id === id ? { ...m, follows: isFollowing ? m.follows + 1 : Math.max(0, m.follows - 1) } : m));
 
-    fetch(`/api/mods/${id}/like`, { method: 'POST' })
+    fetch(`/api/mods/${id}/like`, { 
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ isFollowing })
+    })
       .then(res => res.json())
       .then(data => {
         if (data.success) {

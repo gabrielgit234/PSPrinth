@@ -16,9 +16,7 @@ export const SettingsModal: React.FC = () => {
     animationsEnabled,
     setAnimationsEnabled,
     compactMode,
-    setCompactMode,
-    language,
-    setLanguage
+    setCompactMode
   } = useSettings();
 
   const colors = [
@@ -114,33 +112,6 @@ export const SettingsModal: React.FC = () => {
                       title={color.name}
                     />
                   ))}
-                </div>
-              </div>
-
-              {/* Language */}
-              <div>
-                <label className="block text-sm font-medium text-secondary mb-3">Language</label>
-                <div className="flex gap-4">
-                  <button
-                    onClick={() => setLanguage('pt')}
-                    className={`flex-1 py-2 px-4 rounded-xl border transition-all ${
-                      language === 'pt' 
-                        ? 'bg-primary/10 border-primary text-primary' 
-                        : 'bg-background border-border text-secondary hover:border-gray-400'
-                    }`}
-                  >
-                    Português
-                  </button>
-                  <button
-                    onClick={() => setLanguage('en')}
-                    className={`flex-1 py-2 px-4 rounded-xl border transition-all ${
-                      language === 'en' 
-                        ? 'bg-primary/10 border-primary text-primary' 
-                        : 'bg-background border-border text-secondary hover:border-gray-400'
-                    }`}
-                  >
-                    English
-                  </button>
                 </div>
               </div>
 
