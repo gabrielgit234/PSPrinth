@@ -1,6 +1,12 @@
 
 import { Mod, Skin } from './types';
 
+export const AUTHOR_AVATARS: Record<string, string> = {
+  'mega_biel10': 'https://i.postimg.cc/Z911nshF/image.png',
+  'sexy shrek': 'https://api.dicebear.com/7.x/avataaars/svg?seed=sexyshrek&backgroundColor=c0aede',
+  'Bonkunph': 'https://i.postimg.cc/wzCPyTrb/2-removebg-preview.png',
+};
+
 export const MOCK_MODS: Mod[] = [
   {
     id: 'spawned-eggs',
@@ -125,7 +131,7 @@ export const MOCK_MODS: Mod[] = [
   {
     id: 'actions-stuff',
     title: 'Actions & Stuff 1.5',
-    description: 'Adds new animations and actions to the game for a more dynamic experience.',
+    description: 'A port of Actions and Stuff for MCPSP.\nWARNING: this texture does not contain animations!!!',
     author: 'mega_biel10',
     downloads: 0,
     follows: 0,

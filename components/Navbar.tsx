@@ -70,7 +70,7 @@ export const Navbar: React.FC = () => {
                 </Link>
               ))}
               <a
-                href="https://mcskins.top/64x32/"
+                href="https://mskins.net/en/resolution/64x32"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors text-secondary hover:bg-surface-hover hover:text-text"
@@ -143,7 +143,7 @@ export const Navbar: React.FC = () => {
               </Link>
             ))}
             <a
-                href="https://mcskins.top/64x32/"
+                href="https://mskins.net/en/resolution/64x32"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsOpen(false)}

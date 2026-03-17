@@ -57,10 +57,6 @@ export const Mods: React.FC = () => {
     return matchesSearch && matchesCategory;
   }).sort((a, b) => {
       switch (sortBy) {
-          case 'Downloads':
-              return b.downloads - a.downloads;
-          case 'Follows':
-              return b.follows - a.follows;
           case 'Newest':
               return new Date(b.updated).getTime() - new Date(a.updated).getTime();
           case 'Updated':
@@ -120,8 +116,6 @@ export const Mods: React.FC = () => {
                                 className="w-full appearance-none bg-background text-text border border-border rounded-xl py-4 pl-5 pr-12 font-medium cursor-pointer hover:bg-surface-hover transition-colors focus:outline-none focus:border-primary/50 text-lg"
                             >
                                 <option>Relevance</option>
-                                <option>Downloads</option>
-                                <option>Follows</option>
                                 <option>Newest</option>
                                 <option>Updated</option>
                             </select>

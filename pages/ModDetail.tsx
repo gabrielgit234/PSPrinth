@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useData } from '../contexts/DataContext';
 import { Download, Share2, Flag, Calendar, Heart, Eye, FileText, AlertTriangle, CheckCircle, MessageCircle, Tag } from 'lucide-react';
+import { AUTHOR_AVATARS } from '../constants';
 
 export const ModDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -47,6 +48,8 @@ export const ModDetail: React.FC = () => {
       </button>
   );
 
+  const authorsList = mod?.author.split(/, | and /) || [];
+
   return (
     <div className="min-h-screen bg-background transition-colors duration-300">
        {/* Header Section */}
@@ -69,18 +72,10 @@ export const ModDetail: React.FC = () => {
                   <div className="flex-grow flex flex-col justify-center">
                       <div className="flex items-center gap-3 mb-2">
                         <h1 className="text-3xl font-extrabold text-text">{mod.title}</h1>
-                        <span className="px-2 py-0.5 rounded text-xs font-bold bg-surface-hover border border-border text-primary">
-                            RESOURCE PACK
-                        </span>
                       </div>
                       <p className="text-secondary max-w-3xl mb-4 line-clamp-2">{mod.description}</p>
+                      
                       <div className="flex flex-wrap items-center gap-6 text-sm text-secondary font-medium">
-                          <span className="flex items-center gap-2 hover:text-text cursor-pointer transition-colors">
-                              <Download size={18} /> {mod.downloads.toLocaleString()} downloads
-                          </span>
-                          <span className="flex items-center gap-2 hover:text-text cursor-pointer transition-colors">
-                              <Heart size={18} /> {mod.follows.toLocaleString()} followers
-                          </span>
                           <span className="flex items-center gap-2">
                               <Tag size={18} /> v{mod.version}
                           </span>
@@ -112,16 +107,6 @@ export const ModDetail: React.FC = () => {
                                    <Share2 size={16} /> Share
                                  </span>
                                )}
-                           </button>
-                           <button 
-                                onClick={handleFollow}
-                                className={`flex-1 border border-border py-2 rounded-lg flex justify-center items-center gap-2 font-medium transition-colors ${
-                                    isFollowed 
-                                        ? 'bg-red-500/20 text-red-400 border-red-500/50' 
-                                        : 'bg-surface text-text hover:bg-surface-hover'
-                                }`}
-                           >
-                               <Heart size={16} fill={isFollowed ? "currentColor" : "none"} /> {isFollowed ? 'Unfollow' : 'Follow'}
                            </button>
                       </div>
                   </div>
@@ -159,14 +144,20 @@ export const ModDetail: React.FC = () => {
                    {/* Members */}
                    <div className="bg-surface rounded-lg border border-border p-5">
                         <h3 className="text-text font-bold mb-4">Members</h3>
-                        <div className="flex items-center gap-3 mb-4">
-                            <div className="w-10 h-10 rounded-lg bg-surface-hover flex items-center justify-center text-lg font-bold text-secondary">
-                                {mod.author.charAt(0)}
-                            </div>
-                            <div>
-                                <div className="text-primary font-bold hover:underline cursor-pointer">{mod.author}</div>
-                                <div className="text-xs text-secondary">Owner</div>
-                            </div>
+                        <div className="flex flex-col gap-4 mb-4">
+                            {authorsList.map((author, index) => (
+                                <div key={author} className="flex items-center gap-3">
+                                    <img 
+                                        src={AUTHOR_AVATARS[author] || `https://api.dicebear.com/7.x/avataaars/svg?seed=${author}&backgroundColor=c0aede`} 
+                                        alt={author} 
+                                        className="w-10 h-10 rounded-lg bg-surface-hover object-cover"
+                                    />
+                                    <div>
+                                        <div className="text-primary font-bold hover:underline cursor-pointer">{author}</div>
+                                        <div className="text-xs text-secondary">{index === 0 ? 'Owner' : 'Member'}</div>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                         
                         {mod.discordUrl && (

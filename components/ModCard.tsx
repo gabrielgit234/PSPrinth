@@ -69,22 +69,6 @@ export const ModCard: React.FC<ModCardProps> = ({ mod }) => {
              ))}
           </div>
         </div>
-
-        {/* Stats Column */}
-        <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-4 sm:gap-3 text-sm text-secondary sm:min-w-[140px] sm:border-l sm:border-border sm:pl-6">
-            <div className="flex items-center gap-2 w-full sm:justify-end group/stat">
-                <div className="p-1.5 rounded-full bg-background group-hover/stat:bg-primary/10 transition-colors">
-                    <Download size={14} className="text-secondary group-hover/stat:text-primary transition-colors"/>
-                </div>
-                <span className="font-semibold text-text">{formatNumber(mod.downloads)}</span>
-            </div>
-            <div className="flex items-center gap-2 w-full sm:justify-end group/stat">
-                <div className="p-1.5 rounded-full bg-background group-hover/stat:bg-red-500/10 transition-colors">
-                    <Heart size={14} className="text-secondary group-hover/stat:text-red-500 transition-colors"/>
-                </div>
-                <span className="font-semibold text-text">{formatNumber(mod.follows)}</span>
-            </div>
-        </div>
       </div>
     </Link>
   );

@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 
 export const Home: React.FC = () => {
   const { mods } = useData();
-  const featuredMods = mods.slice(0, 2);
+  const featuredMods = mods.filter(mod => ['actions-stuff', 'bare-bones-plus'].includes(mod.id)).slice(0, 2);
   
   const totalDownloads = mods.reduce((acc, mod) => acc + mod.downloads, 0);
   const totalMods = mods.length;
@@ -33,7 +33,7 @@ export const Home: React.FC = () => {
               transition={{ delay: 0.1 }}
             >
                 <h1 className="text-5xl md:text-7xl font-extrabold text-text tracking-tight mb-6 leading-tight">
-                    The Home of <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-green-400">PSP Minecraft</span>
+                    The Home of <span className="text-primary">PSP Minecraft</span>
                 </h1>
                 <p className="text-xl md:text-2xl text-secondary mb-10 max-w-2xl mx-auto leading-relaxed">
                     Discover the best textures for your MCPSP with the best active community.
@@ -43,24 +43,6 @@ export const Home: React.FC = () => {
                     <Link to="/textures" className="w-full sm:w-auto bg-primary text-black px-8 py-4 rounded-xl font-bold hover:brightness-110 transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(27,217,106,0.3)] flex items-center justify-center gap-2">
                         Browse Textures <ArrowRight size={20} />
                     </Link>
-                </div>
-
-                {/* Real Stats Counter */}
-                <div className="grid grid-cols-2 gap-8 border-t border-border pt-8 max-w-2xl mx-auto">
-                    <div className="flex flex-col items-center">
-                        <div className="flex items-center gap-2 text-3xl font-bold text-text mb-1">
-                            <Download className="text-primary" size={24} />
-                            <span>{totalDownloads.toLocaleString()}</span>
-                        </div>
-                        <span className="text-sm text-secondary font-medium uppercase tracking-wider">Total Downloads</span>
-                    </div>
-                    <div className="flex flex-col items-center">
-                        <div className="flex items-center gap-2 text-3xl font-bold text-text mb-1">
-                            <Layers className="text-primary" size={24} />
-                            <span>{totalMods}</span>
-                        </div>
-                        <span className="text-sm text-secondary font-medium uppercase tracking-wider">Active Textures</span>
-                    </div>
                 </div>
             </motion.div>
         </div>
