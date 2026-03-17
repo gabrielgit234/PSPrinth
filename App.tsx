@@ -45,7 +45,7 @@ const AppContent: React.FC = () => {
           <footer className="bg-surface border-t border-border py-8 mt-12 transition-colors duration-300">
               <div className="max-w-7xl mx-auto px-4 text-center">
                   <p className="text-secondary text-sm">
-                      © 2024 PSPBlock Forge. Not affiliated with Mojang or Sony. <br/>
+                      © 2026 PSPrinth not affiliated with Mojang. <br/>
                       Powered by React.
                   </p>
               </div>

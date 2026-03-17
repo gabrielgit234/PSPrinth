@@ -8,7 +8,7 @@ export const Community: React.FC = () => {
       name: 'mega_biel10',
       role: 'Principal Creator',
       avatar: 'https://i.postimg.cc/Z911nshF/image.png',
-      description: 'Creator of most of the incredible textures and mods for the PSP.',
+      description: 'Porter of Java textures to PSP',
     },
     {
       name: 'sexy shrek',
@@ -20,7 +20,7 @@ export const Community: React.FC = () => {
       name: 'Bonkunph',
       role: 'Modder & Artist',
       avatar: 'https://i.postimg.cc/wzCPyTrb/2-removebg-preview.png',
-      description: 'Contributor of classic mods and textures.',
+      description: 'Creator of Moder UI',
     }
   ];
 
