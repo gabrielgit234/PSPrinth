@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useData } from '../contexts/DataContext';
-import { Download, Share2, Flag, Calendar, Heart, Eye, FileText, AlertTriangle, CheckCircle, MessageCircle, Tag } from 'lucide-react';
+import { Download, Share2, Flag, Calendar, Heart, Eye, FileText, AlertTriangle, CheckCircle, MessageCircle, Tag, Link as LinkIcon } from 'lucide-react';
 import { AUTHOR_AVATARS } from '../constants';
 
 export const ModDetail: React.FC = () => {
@@ -31,10 +31,6 @@ export const ModDetail: React.FC = () => {
       incrementDownload(mod.id);
   };
 
-  const handleReport = () => {
-      alert('Report submitted for review. Thank you for keeping the community safe.');
-  };
-
   const TabButton = ({ id, label }: { id: typeof activeTab, label: string }) => (
       <button 
         onClick={() => setActiveTab(id)}
@@ -49,6 +45,31 @@ export const ModDetail: React.FC = () => {
   );
 
   const authorsList = mod?.author.split(/, | and /) || [];
+
+  const getHostInfo = (url: string | undefined) => {
+      if (!url) return null;
+      if (url.includes('drive.google.com')) {
+          return (
+              <div className="flex items-center gap-3 p-3 rounded-lg bg-surface-hover border border-border">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg" alt="Google Drive" className="w-6 h-6 object-contain" />
+                  <span className="text-text font-medium">Google Drive</span>
+              </div>
+          );
+      }
+      if (url.includes('mediafire.com')) {
+          return (
+              <div className="flex items-center gap-3 p-3 rounded-lg bg-surface-hover border border-border">
+                  <img src="https://static.mediafire.com/images/backgrounds/header/mf_logo_full_color.svg" alt="MediaFire" className="h-5 object-contain" />
+              </div>
+          );
+      }
+      return (
+          <div className="flex items-center gap-3 p-3 rounded-lg bg-surface-hover border border-border">
+              <LinkIcon size={20} className="text-secondary" />
+              <span className="text-text font-medium">External Link</span>
+          </div>
+      );
+  };
 
   return (
     <div className="min-h-screen bg-background transition-colors duration-300">
@@ -65,7 +86,7 @@ export const ModDetail: React.FC = () => {
                   <img 
                     src={mod.iconUrl} 
                     alt={mod.title} 
-                    className="w-24 h-24 md:w-32 md:h-32 rounded-xl bg-background shadow-2xl border border-border object-cover"
+                    className="w-24 h-24 md:w-32 md:h-32 rounded-xl bg-background shadow-2xl border border-border object-contain"
                   />
                   
                   {/* Title & Metadata */}
@@ -150,7 +171,7 @@ export const ModDetail: React.FC = () => {
                                     <img 
                                         src={AUTHOR_AVATARS[author] || `https://api.dicebear.com/7.x/avataaars/svg?seed=${author}&backgroundColor=c0aede`} 
                                         alt={author} 
-                                        className="w-10 h-10 rounded-lg bg-surface-hover object-cover"
+                                        className="w-14 h-14 rounded-lg bg-surface-hover object-cover scale-110"
                                     />
                                     <div>
                                         <div className="text-primary font-bold hover:underline cursor-pointer">{author}</div>
@@ -183,14 +204,11 @@ export const ModDetail: React.FC = () => {
                             ))}
                         </div>
                    </div>
-                   
-                   <div className="flex justify-center">
-                       <button 
-                            onClick={handleReport}
-                            className="text-secondary hover:text-red-400 text-xs flex items-center gap-1 transition-colors"
-                       >
-                           <Flag size={12} /> Report Project
-                       </button>
+
+                   {/* Download Source */}
+                   <div className="bg-surface rounded-lg border border-border p-5">
+                        <h3 className="text-text font-bold mb-4">Download Source</h3>
+                        {getHostInfo(mod.zipUrl)}
                    </div>
                </div>
            </div>

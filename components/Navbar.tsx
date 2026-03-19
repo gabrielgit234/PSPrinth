@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, Gamepad2, User, Users, Search, Sparkles, Settings, Heart } from 'lucide-react';
+import { Menu, X, Gamepad2, User, Users, Search, Sparkles, Settings, Heart, ExternalLink, AlertTriangle } from 'lucide-react';
 import { useSettings } from '../contexts/SettingsContext';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showSkinsWarning, setShowSkinsWarning] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const { openSettings } = useSettings();
@@ -24,8 +26,20 @@ export const Navbar: React.FC = () => {
     }
   };
 
+  const handleSkinsClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowSkinsWarning(true);
+  };
+
+  const handleContinueSkins = () => {
+    window.open('https://mskins.net/en/resolution/64x32', '_blank', 'noopener,noreferrer');
+    setShowSkinsWarning(false);
+    setIsOpen(false);
+  };
+
   return (
-    <nav className="sticky top-0 z-50 bg-surface/90 backdrop-blur-md border-b border-border shadow-lg transition-colors duration-300">
+    <>
+      <nav className="sticky top-0 z-50 bg-surface/90 backdrop-blur-md border-b border-border shadow-lg transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo & Discord */}
@@ -71,8 +85,7 @@ export const Navbar: React.FC = () => {
               ))}
               <a
                 href="https://mskins.net/en/resolution/64x32"
-                target="_blank"
-                rel="noopener noreferrer"
+                onClick={handleSkinsClick}
                 className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors text-secondary hover:bg-surface-hover hover:text-text"
               >
                 <User size={18} />
@@ -144,9 +157,7 @@ export const Navbar: React.FC = () => {
             ))}
             <a
                 href="https://mskins.net/en/resolution/64x32"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setIsOpen(false)}
+                onClick={handleSkinsClick}
                 className="flex items-center gap-2 px-3 py-2 rounded-md text-base font-medium text-secondary hover:bg-surface-hover hover:text-text"
             >
                 <User size={18} />
@@ -155,6 +166,63 @@ export const Navbar: React.FC = () => {
           </div>
         </div>
       )}
-    </nav>
+      </nav>
+
+      {/* Skins Warning Modal */}
+      <AnimatePresence>
+        {showSkinsWarning && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+          >
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="bg-surface border border-border rounded-2xl p-6 max-w-md w-full shadow-[0_0_40px_rgba(0,0,0,0.5)] overflow-hidden relative"
+            >
+              {/* Decorative background glow */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-32 bg-primary/10 blur-3xl pointer-events-none" />
+              
+              <div className="relative z-10">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary border border-primary/20 shrink-0">
+                    <AlertTriangle size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-text">External Site Warning</h3>
+                    <p className="text-sm text-secondary">You are leaving PSPrinth</p>
+                  </div>
+                </div>
+                
+                <div className="bg-background rounded-xl p-4 mb-6 border border-border">
+                  <p className="text-secondary text-sm leading-relaxed">
+                    You are about to be redirected to <strong className="text-text">mskins.net</strong>. This is an external website not affiliated with PSPrinth.
+                  </p>
+                </div>
+                
+                <div className="flex justify-end gap-3">
+                  <button
+                    onClick={() => setShowSkinsWarning(false)}
+                    className="px-5 py-2.5 rounded-xl font-medium text-text bg-surface-hover hover:bg-border transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleContinueSkins}
+                    className="px-5 py-2.5 rounded-xl font-bold text-black bg-primary hover:brightness-110 transition-all transform hover:scale-105 shadow-[0_0_15px_rgba(27,217,106,0.3)] flex items-center gap-2"
+                  >
+                    Continue <ExternalLink size={18} />
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };

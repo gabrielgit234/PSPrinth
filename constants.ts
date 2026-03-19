@@ -5,9 +5,40 @@ export const AUTHOR_AVATARS: Record<string, string> = {
   'mega_biel10': 'https://i.postimg.cc/Z911nshF/image.png',
   'sexy shrek': 'https://api.dicebear.com/7.x/avataaars/svg?seed=sexyshrek&backgroundColor=c0aede',
   'Bonkunph': 'https://i.postimg.cc/wzCPyTrb/2-removebg-preview.png',
+  '♠ Mai ღ.cpp': 'https://i.postimg.cc/hG5JNqt4/Design-sem-nome-10-1-removebg-preview.png',
 };
 
 export const MOCK_MODS: Mod[] = [
+  {
+    id: 'purebdcraft',
+    title: 'PureBDcraft',
+    description: 'A comic book style texture pack that transforms your Minecraft world into a vibrant and stylized experience.',
+    author: '♠ Mai ღ.cpp',
+    downloads: 0,
+    follows: 0,
+    updated: new Date().toISOString().split('T')[0],
+    categories: ['Stylized', 'HD'],
+    iconUrl: 'https://i.postimg.cc/SR0hzgg0/pack.png',
+    version: '1.0',
+    license: 'Unknown',
+    loader: 'Lamecraft',
+    zipUrl: 'https://drive.google.com/drive/folders/1PQPqDYFUqSogPCAO7rKVhNv62JjPfZNu?usp=drive_link'
+  },
+  {
+    id: 'immersive-interface',
+    title: 'Immersive Interface',
+    description: 'A brand new immersive interface texture pack for a cleaner and more engaging UI experience.',
+    author: 'sexy shrek',
+    downloads: 0,
+    follows: 0,
+    updated: new Date().toISOString().split('T')[0],
+    categories: ['UI'],
+    iconUrl: 'https://i.postimg.cc/cJmZ271Q/pack.png',
+    version: '1.0',
+    license: 'Unknown',
+    loader: 'Lamecraft',
+    zipUrl: 'https://www.mediafire.com/file/rikepsu5z82d2po/immersive_interface.zip/file'
+  },
   {
     id: 'spawned-eggs',
     title: 'Spawned Eggs',

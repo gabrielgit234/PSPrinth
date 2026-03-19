@@ -40,7 +40,7 @@ export const ModCard: React.FC<ModCardProps> = ({ mod }) => {
           <img 
             src={mod.iconUrl} 
             alt={mod.title} 
-            className={`${compactMode ? 'w-16 h-16 sm:w-20 sm:h-20' : 'w-24 h-24 sm:w-28 sm:h-28'} rounded-xl object-cover bg-background shadow-xl border border-border group-hover:border-primary/30 transition-colors`}
+            className={`${compactMode ? 'w-16 h-16 sm:w-20 sm:h-20' : 'w-24 h-24 sm:w-28 sm:h-28'} rounded-xl object-contain bg-background shadow-xl border border-border group-hover:border-primary/30 transition-colors p-1`}
           />
         </div>
 
