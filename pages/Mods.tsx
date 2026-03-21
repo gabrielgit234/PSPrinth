@@ -133,7 +133,7 @@ export const Mods: React.FC = () => {
             {/* Left Sidebar Filters */}
             <div className={`fixed inset-0 z-40 bg-black/80 lg:hidden transition-opacity ${showMobileFilters ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={() => setShowMobileFilters(false)} />
             
-            <div className={`fixed inset-y-0 left-0 z-50 w-72 bg-surface p-6 transform transition-transform lg:transform-none lg:sticky lg:top-24 lg:block lg:w-auto lg:bg-transparent lg:p-0 space-y-8 ${showMobileFilters ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'} border-r lg:border-none border-border`}>
+            <div className={`fixed inset-y-0 left-0 z-50 lg:z-30 w-72 bg-surface p-6 transform transition-transform lg:transform-none lg:sticky lg:top-24 lg:block lg:w-auto lg:bg-transparent lg:p-0 space-y-8 ${showMobileFilters ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'} border-r lg:border-none border-border`}>
                 <div className="flex justify-between items-center lg:hidden mb-6">
                     <h2 className="text-xl font-bold text-text">Filters</h2>
                     <button onClick={() => setShowMobileFilters(false)} className="text-secondary hover:text-text">

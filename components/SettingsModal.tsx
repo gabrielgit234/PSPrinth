@@ -43,16 +43,16 @@ export const SettingsModal: React.FC = () => {
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="relative bg-surface border border-border rounded-2xl p-4 sm:p-6 w-full max-w-md shadow-2xl max-h-[90vh] overflow-y-auto"
+            className="relative bg-surface border border-border rounded-2xl w-full max-w-md shadow-2xl flex flex-col max-h-[90vh] overflow-hidden"
           >
-            <div className="flex items-center justify-center relative mb-6 sticky top-0 bg-surface z-10 pb-2 border-b border-border/50">
+            <div className="flex-shrink-0 flex items-center justify-center relative p-4 sm:p-6 border-b border-border/50 bg-surface z-20">
               <h2 className="text-xl font-bold text-text">Site Settings</h2>
-              <button onClick={closeSettings} className="absolute right-0 text-secondary hover:text-text p-1 rounded-full hover:bg-surface-hover transition-colors">
+              <button onClick={closeSettings} className="absolute right-4 sm:right-6 text-secondary hover:text-text p-1 rounded-full hover:bg-surface-hover transition-colors">
                 <X size={24} />
               </button>
             </div>
             
-            <div className="space-y-8">
+            <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-8">
               {/* Theme Toggle */}
               <div>
                 <label className="block text-sm font-medium text-secondary mb-3">Appearance</label>
@@ -145,7 +145,7 @@ export const SettingsModal: React.FC = () => {
               </div>
             </div>
 
-            <div className="mt-8 flex justify-end sticky bottom-0 bg-surface pt-4 border-t border-border/50">
+            <div className="flex-shrink-0 p-4 sm:p-6 border-t border-border/50 bg-surface z-20 flex justify-end">
               <button 
                 onClick={closeSettings}
                 className="bg-primary text-black font-bold py-2 px-6 rounded-lg hover:brightness-110 transition-all"
