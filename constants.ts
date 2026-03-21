@@ -10,6 +10,21 @@ export const AUTHOR_AVATARS: Record<string, string> = {
 
 export const MOCK_MODS: Mod[] = [
   {
+    id: 'bare-bones-modern-ui-1-6',
+    title: 'BARE BONES X MODERN UI 1.6',
+    description: 'The latest 1.6 version of Bare Bones combined with a sleek Modern Dark UI.',
+    author: 'sexy shrek and Odysseyside',
+    downloads: 0,
+    follows: 0,
+    updated: new Date().toISOString().split('T')[0],
+    categories: ['Vanilla Like', 'UI', 'Dark UI', 'Simple'],
+    iconUrl: 'https://i.postimg.cc/Xv7D1bht/pack.png',
+    version: '1.6',
+    license: 'Unknown',
+    loader: 'Lamecraft',
+    zipUrl: 'https://www.mediafire.com/file/k3v4rvdcbtk1gjn/Bare_Bones_X_Modern_UI_(dark).rar/file'
+  },
+  {
     id: 'purebdcraft',
     title: 'PureBDcraft',
     description: 'A comic book style texture pack that transforms your Minecraft world into a vibrant and stylized experience.',
