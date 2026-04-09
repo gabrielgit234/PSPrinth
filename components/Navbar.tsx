@@ -14,6 +14,7 @@ export const Navbar: React.FC = () => {
 
   const navLinks = [
     { name: 'Textures', path: '/textures', icon: <Gamepad2 size={18} /> },
+    { name: 'Maker', path: '/maker', icon: <Sparkles size={18} /> },
     { name: 'Donate', path: '/donate', icon: <Heart size={18} /> },
   ];
 

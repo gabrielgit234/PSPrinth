@@ -6,6 +6,7 @@ export const AUTHOR_AVATARS: Record<string, string> = {
   'sexy shrek': 'https://api.dicebear.com/7.x/avataaars/svg?seed=sexyshrek&backgroundColor=c0aede',
   'Bonkunph': 'https://i.postimg.cc/wzCPyTrb/2-removebg-preview.png',
   '♠ Mai ღ.cpp': 'https://i.postimg.cc/hG5JNqt4/Design-sem-nome-10-1-removebg-preview.png',
+  'Odysseyside': 'https://api.dicebear.com/7.x/avataaars/svg?seed=Odysseyside&backgroundColor=b6e3f4',
 };
 
 export const MOCK_MODS: Mod[] = [
@@ -13,7 +14,7 @@ export const MOCK_MODS: Mod[] = [
     id: 'bare-bones-modern-ui-1-6',
     title: 'BARE BONES X MODERN UI 1.6',
     description: 'The latest 1.6 version of Bare Bones combined with a sleek Modern Dark UI.',
-    author: 'sexy shrek and Odysseyside',
+    author: 'mega_biel10 and sexy shrek',
     downloads: 0,
     follows: 0,
     updated: new Date().toISOString().split('T')[0],
@@ -103,7 +104,7 @@ export const MOCK_MODS: Mod[] = [
     id: 'bare-bones-modern-ui',
     title: 'Bare Bones+ X Dark UI',
     description: 'Combines the Bare Bones+ texture pack with a sleek, dark user interface.',
-    author: 'mega_biel10, sexy shrek and Bonkunph',
+    author: 'mega_biel10 and sexy shrek',
     downloads: 0,
     follows: 0,
     updated: '2024-03-01',

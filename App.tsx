@@ -6,6 +6,7 @@ import { Mods } from './pages/Mods';
 import { ModDetail } from './pages/ModDetail';
 import { Donate } from './pages/Donate';
 import { Community } from './pages/Community';
+import { Maker } from './pages/Maker';
 import { DataProvider } from './contexts/DataContext';
 import { SettingsProvider } from './contexts/SettingsContext';
 import { SettingsModal } from './components/SettingsModal';
@@ -23,6 +24,7 @@ const AnimatedRoutes: React.FC = () => {
         <Route path="/textures" element={<Mods />} />
         <Route path="/mod/:id" element={<ModDetail />} />
         <Route path="/community" element={<Community />} />
+        <Route path="/maker" element={<Maker />} />
         <Route path="/donate" element={<Donate />} />
       </Routes>
     </AnimatePresence>
