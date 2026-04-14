@@ -1,5 +1,5 @@
 
-import { Mod, Skin } from './types';
+import type { Mod, Skin } from './types.ts';
 
 export const AUTHOR_AVATARS: Record<string, string> = {
   'mega_biel10': 'https://i.postimg.cc/Z911nshF/image.png',

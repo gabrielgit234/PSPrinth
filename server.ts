@@ -1,6 +1,6 @@
 import express from 'express';
 import { createServer as createViteServer } from 'vite';
-import { MOCK_MODS } from './constants';
+import { MOCK_MODS } from './constants.ts';
 import fs from 'fs';
 import path from 'path';
 

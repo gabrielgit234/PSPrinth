@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, Gamepad2, User, Users, Search, Sparkles, Settings, Heart, ExternalLink, AlertTriangle } from 'lucide-react';
+import { Menu, X, Gamepad2, User, Users, Search, Sparkles, Settings, Heart, ExternalLink, AlertTriangle, Download } from 'lucide-react';
 import { useSettings } from '../contexts/SettingsContext';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -8,6 +8,7 @@ export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [showSkinsWarning, setShowSkinsWarning] = useState(false);
+  const [showDownloadMessage, setShowDownloadMessage] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const { openSettings } = useSettings();
@@ -35,6 +36,11 @@ export const Navbar: React.FC = () => {
     window.open('https://mskins.net/en/resolution/64x32', '_blank', 'noopener,noreferrer');
     setShowSkinsWarning(false);
     setIsOpen(false);
+  };
+
+  const triggerDownloadMessage = () => {
+    setShowDownloadMessage(true);
+    setTimeout(() => setShowDownloadMessage(false), 3000);
   };
 
   return (
@@ -110,6 +116,13 @@ export const Navbar: React.FC = () => {
                 />
              </div>
              <button 
+                onClick={triggerDownloadMessage}
+                className="p-2 rounded-full bg-surface-hover text-secondary hover:text-text hover:bg-surface-hover transition-colors"
+                title="Download Desktop App"
+              >
+                <Download size={20} />
+              </button>
+              <button 
                 onClick={openSettings}
                 className="p-2 rounded-full bg-surface-hover text-secondary hover:text-text hover:bg-surface-hover transition-colors"
                 title="Settings"
@@ -120,6 +133,12 @@ export const Navbar: React.FC = () => {
 
           {/* Mobile menu button */}
           <div className="-mr-2 flex md:hidden gap-2">
+            <button 
+              onClick={triggerDownloadMessage}
+              className="bg-surface-hover inline-flex items-center justify-center p-2 rounded-md text-secondary hover:text-text hover:bg-surface-hover focus:outline-none"
+            >
+              <Download size={24} />
+            </button>
             <button 
               onClick={openSettings}
               className="bg-surface-hover inline-flex items-center justify-center p-2 rounded-md text-secondary hover:text-text hover:bg-surface-hover focus:outline-none"
@@ -220,6 +239,21 @@ export const Navbar: React.FC = () => {
                 </div>
               </div>
             </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Download Coming Soon Toast */}
+      <AnimatePresence>
+        {showDownloadMessage && (
+          <motion.div
+            initial={{ opacity: 0, y: 50, x: '-50%' }}
+            animate={{ opacity: 1, y: 0, x: '-50%' }}
+            exit={{ opacity: 0, y: 20, x: '-50%' }}
+            className="fixed bottom-8 left-1/2 z-[110] bg-primary text-black px-6 py-3 rounded-full font-bold shadow-lg flex items-center gap-2"
+          >
+            <Sparkles size={18} />
+            Desktop App coming soon...
           </motion.div>
         )}
       </AnimatePresence>
