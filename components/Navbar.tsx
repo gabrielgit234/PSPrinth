@@ -13,6 +13,8 @@ export const Navbar: React.FC = () => {
   const navigate = useNavigate();
   const { openSettings } = useSettings();
 
+  const DESKTOP_DOWNLOAD_URL = "https://download948.mediafire.com/0fptzl03ph2g3oh0M3yM64drxvQ-8i_Gej9q_g1yUCBBtKmbE9LHjvDtkdcCmw3uiqvykQN3hTT5nnEA3d-PgZ7_Sy9l9S_ooRd2COCOPUqVglFdHWXulVwnWw3Qp1qRS8zLTlqlPuuqYfIHDkBb2NTPSFAxofUba_xRLYMyI820kw/agud4o1t1111qfh/PSPrinth.exe";
+
   const navLinks = [
     { name: 'Textures', path: '/textures', icon: <Gamepad2 size={18} /> },
     { name: 'Donate', path: '/donate', icon: <Heart size={18} /> },
@@ -39,6 +41,7 @@ export const Navbar: React.FC = () => {
   };
 
   const triggerDownloadMessage = () => {
+    window.open(DESKTOP_DOWNLOAD_URL, '_blank', 'noopener,noreferrer');
     setShowDownloadMessage(true);
     setTimeout(() => setShowDownloadMessage(false), 3000);
   };
@@ -253,7 +256,7 @@ export const Navbar: React.FC = () => {
             className="fixed bottom-8 left-1/2 z-[110] bg-primary text-black px-6 py-3 rounded-full font-bold shadow-lg flex items-center gap-2"
           >
             <Sparkles size={18} />
-            Desktop App coming soon...
+            Starting Desktop App download...
           </motion.div>
         )}
       </AnimatePresence>
