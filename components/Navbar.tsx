@@ -120,10 +120,13 @@ export const Navbar: React.FC = () => {
              </div>
              <button 
                 onClick={triggerDownloadMessage}
-                className="p-2 rounded-full bg-surface-hover text-secondary hover:text-text hover:bg-surface-hover transition-colors"
-                title="Download Desktop App"
+                className="group relative p-2 rounded-full bg-surface-hover text-secondary hover:text-text hover:bg-surface-hover transition-colors"
+                title="Download Desktop App (Beta)"
               >
                 <Download size={20} />
+                <span className="absolute -top-1 -right-1 bg-primary text-black text-[9px] font-black px-1 rounded-[2px] shadow-sm transform group-hover:scale-110 transition-transform">
+                  BETA
+                </span>
               </button>
               <button 
                 onClick={openSettings}
@@ -138,9 +141,13 @@ export const Navbar: React.FC = () => {
           <div className="-mr-2 flex md:hidden gap-2">
             <button 
               onClick={triggerDownloadMessage}
-              className="bg-surface-hover inline-flex items-center justify-center p-2 rounded-md text-secondary hover:text-text hover:bg-surface-hover focus:outline-none"
+              className="group relative bg-surface-hover inline-flex items-center justify-center p-2 rounded-md text-secondary hover:text-text hover:bg-surface-hover focus:outline-none"
+              title="Download Desktop App (Beta)"
             >
               <Download size={24} />
+              <span className="absolute -top-1 -right-1 bg-primary text-black text-[8px] font-black px-1 rounded-[2px] shadow-sm">
+                BETA
+              </span>
             </button>
             <button 
               onClick={openSettings}
@@ -256,7 +263,7 @@ export const Navbar: React.FC = () => {
             className="fixed bottom-8 left-1/2 z-[110] bg-primary text-black px-6 py-3 rounded-full font-bold shadow-lg flex items-center gap-2"
           >
             <Sparkles size={18} />
-            Starting Desktop App download...
+            Starting Desktop App download (Beta)...
           </motion.div>
         )}
       </AnimatePresence>
